@@ -1,4 +1,4 @@
-import { OrderI } from '../inferfaces/order-i';
+import { OrderI } from '../interfaces/order-i';
 import { StateOrder } from '../enums/state-order.enum';
 
 export class Order implements OrderI{
