@@ -1,4 +1,4 @@
-<app-template-b title="Orders" subtitle="All orders">
+<app-template-a [title]="title" [subtitle]="subtitle">
 
   <app-table-light *ngIf="collection$ | async as collection" [headers]="headers">
 
@@ -28,4 +28,4 @@
     <h3>subsubtitle</h3>
     <p>A very nice text</p>
   </app-text>
-</app-template-b>
+</app-template-a>
