@@ -1,17 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageListOrdersComponent } from './pages/page-list-orders/page-list-orders.component';
-import { OrdersRoutingModule } from './orders-routing.module';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { FormAddOrderComponent } from './components/form-add-order/form-add-order.component';
+import { OrdersRoutingModule } from './orders-routing.module';
+import { PageListOrdersComponent } from './pages/page-list-orders/page-list-orders.component';
+import { PagesAddOrderComponent } from './pages/pages-add-order/pages-add-order.component';
 
 
 
 @NgModule({
-  declarations: [PageListOrdersComponent],
+  declarations: [PageListOrdersComponent, PagesAddOrderComponent, FormAddOrderComponent],
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class OrdersModule { }
