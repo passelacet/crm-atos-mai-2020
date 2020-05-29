@@ -5,8 +5,15 @@ import { PagesAddOrderComponent } from './pages/pages-add-order/pages-add-order.
 
 
 const routes: Routes = [
-  { path: '', component: PageListOrdersComponent },
-  { path: 'add', component: PagesAddOrderComponent },
+  { path: '',
+    component: PageListOrdersComponent,
+    data: {title: 'Orders', subtitle: 'All orders'}
+  },
+  {
+    path: 'add',
+    component: PagesAddOrderComponent,
+    data: {title: 'Orders', subtitle: 'Add an order'}
+  },
 ];
 
 @NgModule({

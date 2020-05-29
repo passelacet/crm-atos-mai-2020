@@ -15,7 +15,7 @@ import { PagesAddOrderComponent } from './pages/pages-add-order/pages-add-order.
     CommonModule,
     OrdersRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class OrdersModule { }

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OrdersService } from '../../services/orders.service';
-import { Order } from 'src/app/shared/models/order';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { StateOrder } from 'src/app/shared/enums/state-order.enum';
 import { Btn } from 'src/app/shared/interfaces/btn';
-import { Observable } from 'rxjs';
+import { Order } from 'src/app/shared/models/order';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'app-page-list-orders',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class PageListOrdersComponent implements OnInit, OnDestroy {
   //public collection: Order[];
-  public collection$: Observable<Order[]>;
+  public collection$: Subject<Order[]> = new Subject();
   public headers: string[];
   public btnRoute: Btn;
   public btnHref: Btn;
@@ -21,12 +22,14 @@ export class PageListOrdersComponent implements OnInit, OnDestroy {
   public subtitle: string;
   //private sub: Subscription;
   public states = Object.values(StateOrder);
-  constructor(private os: OrdersService) {
+  constructor(
+    private os: OrdersService,
+    public route: ActivatedRoute
+    ) {
   }
 
   ngOnInit(): void {
-    this.title = 'Orders';
-    this.subtitle = 'All orders';
+
     this.btnRoute = {
       label: 'Add an order',
       route: 'add'
@@ -39,7 +42,9 @@ export class PageListOrdersComponent implements OnInit, OnDestroy {
       label: 'Open dialogue',
       action: true
     }
-    this.collection$ = this.os.collection;
+    this.os.collection.subscribe((col) => {
+      this.collection$.next(col);
+    })
     //this.os.collection.subscribe((datas) => {
       //console.log(datas);
     //  this.collection = datas;
@@ -51,7 +56,8 @@ export class PageListOrdersComponent implements OnInit, OnDestroy {
       'Tjm HT',
       'Total HT',
       'Total TTC',
-      'State'
+      'State',
+      'Action'
     ];
   }
 
@@ -70,5 +76,14 @@ export class PageListOrdersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     //this.sub.unsubscribe()
+  }
+
+  public delete(item: Order) {
+    this.os.delete(item).subscribe((res) => {
+      this.os.collection.subscribe((datas) => {
+        this.collection$.next(datas);
+      })
+    });
+
   }
 }
