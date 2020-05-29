@@ -12,6 +12,7 @@ import { IconsModule } from './icons/icons.module';
 import { LoginModule } from './login/login.module';
 import { TextModule } from './text/text.module';
 import { UiModule } from './ui/ui.module';
+import { TestObservablesModule } from './test-observables/test-observables.module';
 
 // the second parameter 'fr-FR' is optional
 registerLocaleData(localeFr, 'fr-FR');
@@ -23,6 +24,7 @@ registerLocaleData(localeFr, 'fr-FR');
   imports: [
     BrowserModule,
     LoginModule,
+    TestObservablesModule,
     AppRoutingModule,
     UiModule,
     TextModule,
@@ -30,7 +32,7 @@ registerLocaleData(localeFr, 'fr-FR');
     CoreModule,
     NgbModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [{provide: LOCALE_ID, useValue:'fr-FR'}],
   bootstrap: [AppComponent]
